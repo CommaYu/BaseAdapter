@@ -1,3 +1,4 @@
+#用git管理时，.gitignore写法
 #default
 *.iml
 .gradle
