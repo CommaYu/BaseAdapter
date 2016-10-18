@@ -8,20 +8,22 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.imooc.baseadapter.bean.People;
+import com.imooc.baseadapter.utils.ViewHolder;
 
 import java.util.List;
 
 /**
  * Created by ysc on 10/18/2016.
- * 我们平时写Adapter最常用的办法就是以下这种写法
  */
 
-public class MyAdapter extends BaseAdapter {
+public class MyAdapterTwo extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private List<People> mDatas;
+    private Context mContext;
 
-    public MyAdapter(Context context, List<People> datas) {
+    public MyAdapterTwo(Context context, List<People> datas) {
+        mContext = context;
         mInflater = LayoutInflater.from(context);
         mDatas = datas;
     }
@@ -43,27 +45,15 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item_people, parent, false);
-
-            holder = new ViewHolder();
-            holder.mName = (TextView) convertView.findViewById(R.id.id_name);
-            holder.mAge = (TextView) convertView.findViewById(R.id.id_age);
-
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+        ViewHolder holder = ViewHolder.get(mContext, convertView, parent, R.layout.item_people, position);
 
         People people = mDatas.get(position);
-        holder.mName.setText(people.getName());
-        holder.mAge.setText(people.getAge());
-        return convertView;
+
+        ((TextView) holder.getView(R.id.id_name)).setText(people.getName());
+
+        ((TextView) holder.getView(R.id.id_age)).setText(people.getAge());
+
+        return holder.getmConvertView();
     }
 
-    private class ViewHolder {
-        TextView mName;
-        TextView mAge;
-    }
 }
