@@ -1,12 +1,16 @@
 package com.imooc.baseadapter.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
+ * 鸿洋制作
  * Created by ysc on 10/18/2016.
  */
 
@@ -55,6 +59,62 @@ public class ViewHolder {
 
     public View getmConvertView() {
         return mConvertView;
+    }
+
+    ////////////////以下全部是辅助方法，看我们listview里面的item定的。如果是文字就用setText、图片就用setImagexxx
+    //如果有辅助方法就用辅助方法，没有辅助方法就用原来的((TextView) holder.getView(R.id.id_age)).setText(people.getAge());
+
+    /**
+     * 设置TextView的值
+     *
+     * @param viewId
+     * @param text
+     * @return
+     */
+    public ViewHolder setText(int viewId, String text) {
+        TextView tv = getView(viewId);
+        tv.setText(text);
+        return this;
+    }
+
+    /**
+     * 加载本地图片
+     *
+     * @param viewId
+     * @param resId
+     * @return
+     */
+    public ViewHolder setImageResource(int viewId, int resId) {
+        ImageView iv = getView(viewId);
+        iv.setImageResource(resId);
+        return this;
+    }
+
+    /**
+     * 加载本地位图
+     *
+     * @param viewId
+     * @param bitmap
+     * @return
+     */
+    public ViewHolder setImageBitmap(int viewId, Bitmap bitmap) {
+        ImageView iv = getView(viewId);
+        iv.setImageBitmap(bitmap);
+        return this;
+    }
+
+    /**
+     * 加载网络图片（通过Imageloader进行加载）
+     *
+     * @param viewId
+     * @param url
+     * @return
+     */
+    public ViewHolder setImageURI(int viewId, String url) {
+        ImageView iv = getView(viewId);
+        //Imageloader.load(view,url);
+        //Imageloader.getInstance().loadImg(view,url);
+        return this;
     }
 
 }
