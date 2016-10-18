@@ -9,14 +9,16 @@ import android.widget.BaseAdapter;
 import java.util.List;
 
 /**
- * 鸿洋制作
+ * 鸿洋制作，提取了R.layout.item（子项布局）
  * Created by ysc on 10/18/2016.
  */
 
 public abstract class CommonAdapter<T> extends BaseAdapter {
     protected Context mContext;
+    /**传入数据*/
     protected List<T> mDatas;
     protected LayoutInflater mInflater;
+    /**子项布局*/
     protected int mItemLayoutId;
 
     public CommonAdapter(Context context, int itemLayoutId, List<T> datas) {
