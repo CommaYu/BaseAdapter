@@ -34,10 +34,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         mListView = (ListView) findViewById(R.id.id_listview);
-//        mListView.setAdapter(myAdapterThree);
 
-        //不写Adapter，直接用匿名内部类的写法（不提倡原因：这个里面不能写点击事件，很多地方的点击事件没了）
-        mListView.setAdapter(new CommonAdapter<People>(MainActivity.this,mDatas) {
+        //1、最常见的MyAdapter的写法和运用
+        //        mAdapter = new MyAdapter(this, mDatas);
+        //        mListView.setAdapter(mAdapter);
+
+        //只提取了ViewHolder的MyAdapter写法
+        //        myAdapterTwo = new MyAdapterTwo(this, mDatas);
+        //        mListView.setAdapter(myAdapterTwo);
+
+        //2、提取了Viewholder和提取成CommonAdapter的写法
+        //        myAdapterThree = new MyAdapterThree(this, mDatas);
+        //        mListView.setAdapter(myAdapterThree);
+
+
+        //3、不单独写Adapter，直接用匿名内部类的写法（不提倡原因：这个里面不能写点击事件，很多地方的点击事件没了）
+        mListView.setAdapter(new CommonAdapter<People>(MainActivity.this, mDatas) {
             @Override
             public void convert(ViewHolder holder, People people) {
                 ((TextView) holder.getView(R.id.id_name)).setText(people.getName());
@@ -58,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
         people = new People("Kim4", "16");
         mDatas.add(people);
 
-//        mAdapter = new MyAdapter(this, mDatas);
-//        myAdapterTwo = new MyAdapterTwo(this, mDatas);
-//        myAdapterThree = new MyAdapterThree(this, mDatas);
 
     }
 
