@@ -1,7 +1,6 @@
 package com.imooc.baseadapter;
 
 import android.content.Context;
-import android.widget.TextView;
 
 import com.imooc.baseadapter.bean.People;
 import com.imooc.baseadapter.utils.CommonAdapter;
@@ -24,10 +23,12 @@ public class MyAdapterThree extends CommonAdapter<People> {
     @Override
     public void convert(ViewHolder holder, People people) {
 
+        // 不是用辅助方法写出来的东西
 //        ((TextView) holder.getView(R.id.id_name)).setText(people.getName());
-        holder.setText(R.id.id_name, people.getName());//辅助方法不可能方方面面都做到，没有的还是得靠自己
+//        ((TextView) holder.getView(R.id.id_age)).setText(people.getAge());
 
-        ((TextView) holder.getView(R.id.id_age)).setText(people.getAge());
+        holder.setText(R.id.id_name, people.getName());//辅助方法不可能方方面面都做到，没有的还是得靠自己
+        holder.setText(R.id.id_age, people.getAge());
     }
 
 }
