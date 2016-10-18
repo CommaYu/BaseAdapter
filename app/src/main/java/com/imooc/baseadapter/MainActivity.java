@@ -3,11 +3,8 @@ package com.imooc.baseadapter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.imooc.baseadapter.bean.People;
-import com.imooc.baseadapter.utils.CommonAdapter;
-import com.imooc.baseadapter.utils.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private MyAdapter mAdapter;
     private MyAdapterTwo myAdapterTwo;
     private MyAdapterThree myAdapterThree;
+    private MyAdapterFour myAdapterFour;
 
 
     @Override
@@ -49,13 +47,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         //3、不单独写Adapter，直接用匿名内部类的写法（不提倡原因：这个里面不能写点击事件，很多地方的点击事件没了）
-        mListView.setAdapter(new CommonAdapter<People>(MainActivity.this, mDatas) {
+        /*mListView.setAdapter(new CommonAdapter<People>(MainActivity.this, mDatas) {
             @Override
             public void convert(ViewHolder holder, People people) {
                 ((TextView) holder.getView(R.id.id_name)).setText(people.getName());
                 ((TextView) holder.getView(R.id.id_age)).setText(people.getAge());
             }
-        });
+        });*/
+
+        /*mListView.setAdapter(new com.imooc.baseadapter.utilsbyYsc.CommonAdapter<People>(MainActivity.this,R.layout.item_people,mDatas) {
+            @Override
+            public void convert(com.imooc.baseadapter.utilsbyYsc.ViewHolder holder, People people) {
+                ((TextView) holder.getView(R.id.id_name)).setText(people.getName());
+                ((TextView) holder.getView(R.id.id_age)).setText(people.getAge());
+            }
+        });*/
+
+        myAdapterFour = new MyAdapterFour(MainActivity.this, R.layout.item_people, mDatas);
+        mListView.setAdapter(myAdapterFour);
     }
 
     private void initDatas() {
