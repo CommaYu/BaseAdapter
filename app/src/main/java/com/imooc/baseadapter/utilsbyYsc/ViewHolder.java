@@ -41,6 +41,11 @@ public class ViewHolder {
 
     }
 
+    /**在convertView复用问题中，终于用到了Position*/
+    public int getPostion() {
+        return mPostion;
+    }
+
     /**
      * 通过viewId获取控件
      *

@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
 //        myAdapterFour = new MyAdapterFour(MainActivity.this, R.layout.item_people, mDatas);
 //        mListView.setAdapter(myAdapterFour);
 
-        // 演示解决convertView复用问题
-        mListView.setAdapter(new com.imooc.baseadapter.utilsbyYsc.CommonAdapter<People>(MainActivity.this,R.layout.item_people,mDatas) {
+        // 演示解决convertView复用问题,方法一
+        /*mListView.setAdapter(new com.imooc.baseadapter.utilsbyYsc.CommonAdapter<People>(MainActivity.this,R.layout.item_people,mDatas) {
             @Override
             public void convert(com.imooc.baseadapter.utilsbyYsc.ViewHolder holder, final People people) {
                 ((TextView) holder.getView(R.id.id_name)).setText(people.getName());
@@ -82,6 +82,39 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         people.setChecked(cb.isChecked());
+                    }
+                });
+            }
+        });*/
+
+        // 演示解决convertView复用问题,方法二
+        mListView.setAdapter(new com.imooc.baseadapter.utilsbyYsc.CommonAdapter<People>(MainActivity.this,R.layout.item_people,mDatas) {
+
+            private List<Integer> mPos = new ArrayList<Integer>();
+
+            @Override
+            public void convert(final com.imooc.baseadapter.utilsbyYsc.ViewHolder holder, final People people) {
+                ((TextView) holder.getView(R.id.id_name)).setText(people.getName());
+                ((TextView) holder.getView(R.id.id_age)).setText(people.getAge());
+
+                final CheckBox cb = holder.getView(R.id.id_cb);
+//                cb.setChecked(people.isChecked());
+                cb.setChecked(false);
+
+                if (mPos.contains(holder.getPostion())) {
+                    cb.setChecked(true);
+                }
+
+                cb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        people.setChecked(cb.isChecked());
+                        if (cb.isChecked()) {
+                            mPos.add(holder.getPostion());
+                        } else {
+                            mPos.remove((Integer) holder.getPostion());
+                        }
+
                     }
                 });
             }
