@@ -8,6 +8,17 @@ public class People {
     private String name;
     private String age;
 
+    /**convertView复用问题*/
+    private boolean isChecked;
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
     public People() {
 
     }

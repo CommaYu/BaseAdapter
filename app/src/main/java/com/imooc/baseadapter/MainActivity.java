@@ -2,7 +2,10 @@ package com.imooc.baseadapter;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.imooc.baseadapter.bean.People;
 
@@ -63,8 +66,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        myAdapterFour = new MyAdapterFour(MainActivity.this, R.layout.item_people, mDatas);
-        mListView.setAdapter(myAdapterFour);
+//        myAdapterFour = new MyAdapterFour(MainActivity.this, R.layout.item_people, mDatas);
+//        mListView.setAdapter(myAdapterFour);
+
+        // 演示解决convertView复用问题
+        mListView.setAdapter(new com.imooc.baseadapter.utilsbyYsc.CommonAdapter<People>(MainActivity.this,R.layout.item_people,mDatas) {
+            @Override
+            public void convert(com.imooc.baseadapter.utilsbyYsc.ViewHolder holder, final People people) {
+                ((TextView) holder.getView(R.id.id_name)).setText(people.getName());
+                ((TextView) holder.getView(R.id.id_age)).setText(people.getAge());
+
+                final CheckBox cb = holder.getView(R.id.id_cb);
+                cb.setChecked(people.isChecked());
+                cb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        people.setChecked(cb.isChecked());
+                    }
+                });
+            }
+        });
     }
 
     private void initDatas() {
