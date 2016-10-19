@@ -13,3 +13,9 @@
 （1） 在CheckBox写 android:focusable="false"  
 （2） 大布局写   android:descendantFocusability="blocksDescendants"
 此两种写法就可以解决
+#Adapter焦点占用问题
+由于item布局中加入了CheckBox后，导致listview中的itemb无法点击，只能点击CheckBox
+![adapter焦点占用bug](https://github.com/SavinoYu/BaseAdapter/blob/master/gif/adapter%E7%84%A6%E7%82%B9%E5%8D%A0%E7%94%A8bug.gif)
+#Adapter复用问题
+当数据比较多的时候，我们选中上面一些CheckBox的时候，发现下面的CheckBox也被自动选中了
+![adapter复用问题图片](https://github.com/SavinoYu/BaseAdapter/blob/master/gif/adapter%E5%A4%8D%E7%94%A8%E9%97%AE%E9%A2%98.gif)
