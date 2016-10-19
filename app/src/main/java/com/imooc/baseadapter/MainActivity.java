@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 //        mListView.setAdapter(myAdapterFour);
 
         // 演示解决convertView复用问题,方法一
+        // 方法一需要在实体类People中加入一个boolean isCheck
         /*mListView.setAdapter(new com.imooc.baseadapter.utilsbyYsc.CommonAdapter<People>(MainActivity.this,R.layout.item_people,mDatas) {
             @Override
             public void convert(com.imooc.baseadapter.utilsbyYsc.ViewHolder holder, final People people) {
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
         // 演示解决convertView复用问题,方法二
+        // 方法二需要在ViewHolder中加入一个position
         mListView.setAdapter(new com.imooc.baseadapter.utilsbyYsc.CommonAdapter<People>(MainActivity.this,R.layout.item_people,mDatas) {
 
             private List<Integer> mPos = new ArrayList<Integer>();
@@ -98,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                 ((TextView) holder.getView(R.id.id_age)).setText(people.getAge());
 
                 final CheckBox cb = holder.getView(R.id.id_cb);
-//                cb.setChecked(people.isChecked());
                 cb.setChecked(false);
 
                 if (mPos.contains(holder.getPostion())) {
@@ -108,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 cb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        people.setChecked(cb.isChecked());
                         if (cb.isChecked()) {
                             mPos.add(holder.getPostion());
                         } else {
